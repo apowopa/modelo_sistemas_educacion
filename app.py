@@ -83,8 +83,8 @@ st.sidebar.markdown(
 st.sidebar.markdown(
     "Desarrollado por:"
     "- Apolonio Cuevas Manuel"
-    "- Sansores Arjona Alejandro]"
-    "- Cauich Cauich Manuel]"
+    "- Sansores Arjona Alejandro"
+    "- Cauich Cauich Manuel"
     "Proyecto de Sistemas de Apoyo a la toma de Descisiones"
     "Febrero 2026"
 )
