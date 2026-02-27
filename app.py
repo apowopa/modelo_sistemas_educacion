@@ -80,6 +80,14 @@ st.sidebar.markdown(
     "Segmentación de estudiantes y recomendación "
     "de materiales educativos personalizados."
 )
+st.sidebar.markdown(
+    "Desarrollado por:"
+    "- Apolonio Cuevas Manuel"
+    "- Sansores Arjona Alejandro]"
+    "- Cauich Cauich Manuel]"
+    "Proyecto de Sistemas de Apoyo a la toma de Descisiones"
+    "Febrero 2026"
+)
 st.sidebar.markdown("---")
 st.sidebar.markdown(
     "**Fuente:** [Students Performance Dataset]"
