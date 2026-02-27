@@ -35,7 +35,8 @@ from src.analisis import (
 st.set_page_config(
     page_title="Sistema de Recomendación Educativa",
     page_icon="🎓",
-    layout="wide",
+    layout="centered",
+    initial_sidebar_state=240,
 )
 
 CLUSTER_COLORS = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"]
@@ -73,8 +74,8 @@ def get_knn_artifacts(
 
 
 # ─── Sidebar ─────────────────────────────────────────────────────────────────
-
-st.sidebar.title("🎓 Recomendación Educativa")
+st.sidebar.title("🎓")
+st.sidebar.title(" Recomendación Educativa Personalizada")
 st.sidebar.markdown(
     "Segmentación de estudiantes y recomendación "
     "de materiales educativos personalizados."
