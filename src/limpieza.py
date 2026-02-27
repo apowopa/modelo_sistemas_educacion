@@ -81,6 +81,82 @@ def pipeline():
     )
 
 
+def load_raw_data() -> pd.DataFrame:
+    """Carga el CSV crudo sin transformaciones."""
+    raw_path = os.path.join(RAW_DATA_PATH, DF_NAME)
+    if not os.path.exists(raw_path):
+        raise FileNotFoundError(
+            f"No se encontró el archivo: {raw_path}. "
+            "Ejecuta pipeline() primero o coloca el CSV manualmente."
+        )
+    return pd.read_csv(raw_path)
+
+
+# Mapeo de valores categóricos para display legible
+CATEGORY_MAPS = {
+    "Gender": {0: "Masculino", 1: "Femenino"},
+    "Ethnicity": {0: "Caucásico", 1: "Afroamericano", 2: "Asiático", 3: "Otro"},
+    "ParentalEducation": {
+        0: "Ninguna",
+        1: "Preparatoria",
+        2: "Algo de Universidad",
+        3: "Licenciatura",
+        4: "Posgrado",
+    },
+    "Tutoring": {0: "No", 1: "Sí"},
+    "ParentalSupport": {
+        0: "Ninguno",
+        1: "Bajo",
+        2: "Moderado",
+        3: "Alto",
+        4: "Muy Alto",
+    },
+    "Extracurricular": {0: "No", 1: "Sí"},
+    "Sports": {0: "No", 1: "Sí"},
+    "Music": {0: "No", 1: "Sí"},
+    "Volunteering": {0: "No", 1: "Sí"},
+    "GradeClass": {
+        0: "A (GPA ≥ 3.5)",
+        1: "B (3.0–3.5)",
+        2: "C (2.5–3.0)",
+        3: "D (2.0–2.5)",
+        4: "F (< 2.0)",
+    },
+}
+
+CATEGORICAL_COLS = [
+    "Gender",
+    "Ethnicity",
+    "ParentalEducation",
+    "Tutoring",
+    "ParentalSupport",
+    "Extracurricular",
+    "Sports",
+    "Music",
+    "Volunteering",
+    "GradeClass",
+]
+
+NUMERICAL_COLS = ["Age", "StudyTimeWeekly", "Absences", "GPA"]
+
+
+def explore_data(df: pd.DataFrame) -> dict:
+    """Retorna un diccionario con información exploratoria del DataFrame."""
+    return {
+        "shape": df.shape,
+        "columns": list(df.columns),
+        "dtypes": df.dtypes.to_dict(),
+        "nulls": df.isnull().sum().to_dict(),
+        "total_nulls": int(df.isnull().sum().sum()),
+        "describe": df[NUMERICAL_COLS].describe(),
+        "categorical_value_counts": {
+            col: df[col].value_counts().to_dict()
+            for col in CATEGORICAL_COLS
+            if col in df.columns
+        },
+        "correlation": df[NUMERICAL_COLS].corr(),
+    }
+
+
 if __name__ == "__main__":
     pipeline()
-
